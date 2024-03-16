@@ -6,9 +6,7 @@ export class CryptoService {
     const { symbol = 'bitcoin', minutes = 60 } = options;
     try {
       const url = `http://localhost:3001/api/${symbol}?minutes=${minutes}`;
-      console.log('url', url);
       const response = await axios.get(url);
-
       return response.data;
     } catch (error) {
       console.error(error);

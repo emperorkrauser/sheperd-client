@@ -48,14 +48,6 @@ export const CryptoPage = (props: CryptoOptions) => {
     }
   }, [symbol, location, location.pathname]);
 
-  if (isLoading || !cryptoData) {
-    return (
-      <>
-        <p>Loading...</p>
-      </>
-    );
-  }
-
   const displayHistory = () => {
     let newArr = [];
     for (const key in cryptoData.history.current_price) {
@@ -77,11 +69,19 @@ export const CryptoPage = (props: CryptoOptions) => {
     });
   };
 
+  if (isLoading || !cryptoData || !cryptoData.latest[symbol.toLowerCase()]) {
+    return (
+      <>
+        <p>Loading...</p>
+      </>
+    );
+  }
+
   return (
     <>
       <Nav />
       <h4>{symbol}</h4>
-      <p>Latest: {cryptoData.latest?.bitcoin?.eur ?? '--'}</p>
+      <p>Latest: {cryptoData.latest[symbol.toLowerCase()].eur ?? '--'}</p>
       <p>Average: {cryptoData.average ?? '--'} </p>
       <p>Count: {cryptoData.count ?? '--'}</p>
       <p>History: {displayHistory()}</p>
