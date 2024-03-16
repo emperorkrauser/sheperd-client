@@ -70,9 +70,9 @@ export const CryptoPage = (props: CryptoOptions) => {
     }
     return newArr.map((price) => {
       return (
-        <p key={price.key}>
+        <span key={price.key}>
           {price.key} {price.value}
-        </p>
+        </span>
       );
     });
   };
